@@ -1,30 +1,23 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <TopNav v-if="!hide" />
   <router-view />
+  <BottomNav style="position: fixed;bottom: 0px; width: 100%;" />
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import BottomNav from './components/navbar/BottomNav.vue'
+import TopNav from './components/navbar/TopNav.vue'
+export default {
+  name: 'App',
+  components: {
+    BottomNav,
+    TopNav
+  },
+  computed: {
+    hide() {
+      const hiddenPages = ['Buyer Detail Page', 'Detail Page', 'Stock Detail Page', 'Bill Detail Page', 'OverviewPage', 'OrdersPage', 'BillsPage','BuyerOverviewPage', 'BuyerOrdersPage', 'BuyerBillsPage','BuyerChatPage','SupplierChatPage']
+      return hiddenPages.includes(this.$route.name)
     }
   }
 }
-</style>
+</script>
+ 
