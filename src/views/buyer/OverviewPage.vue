@@ -1,6 +1,6 @@
 <template>
     <div style="padding-bottom: 80px;">
-        <HelloWorld class="mt-2"></HelloWorld>
+        <HelloWorld route="http://192.168.1.133:8001/api/charts/sale" chart="bar" class="mt-2"></HelloWorld>
     </div>
 </template>
 

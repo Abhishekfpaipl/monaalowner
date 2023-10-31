@@ -1,6 +1,6 @@
 <template>
     <div style="padding-bottom: 80px;"> 
-        <SupplierOrder class="mt-2"></SupplierOrder> 
+        <SupplierOrder></SupplierOrder> 
     </div>
 </template>
 

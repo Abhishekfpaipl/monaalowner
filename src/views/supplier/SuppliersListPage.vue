@@ -4,7 +4,7 @@
         <div class="list-group list-flushed rounded-0 mt-2">
             <div v-for="(supplier, index) in suppliers" :key="index" class="list-group-item">
                 <div class="p-2">
-                    <router-link :to="'/supplier-detail/' + supplier.id"
+                    <router-link :to="'/supplier-detail/' + supplier.id + '/overview'"
                         class="flex-fill text-decoration-none text-dark w-100">
                         <div class="d-flex align-items-center w-100">
                             <img class="rounded-circle" style="width: 60px; height: 60px;object-fit: cover;"

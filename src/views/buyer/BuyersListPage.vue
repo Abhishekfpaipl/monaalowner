@@ -3,7 +3,7 @@
         <order-filter></order-filter>
         <div class="list-group list-flushed rounded-0 mt-2 ">
             <div v-for="(buyer, index) in buyers" :key="index" class="list-group-item">
-                <div class=" d-flex p-2">
+                <div class="d-flex p-2">
                     <router-link :to="'/buyer-detail/' + buyer.id" class="text-decoration-none text-dark">
                         <div class="d-flex align-items-center">
                             <img class="rounded-circle" style="width: 60px; height: 60px;object-fit: cover;"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HelloWorld />
+    <HelloWorld route="http://192.168.1.133:8001/api/charts/sale" chart="bar"/>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-    <PaymentLinks>
+    <OrdersLinks>
         <div class="mx-1 d-flex flex-column align-items-center" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasExampleOne" aria-controls="offcanvasExampleOne">
             <i class="bi bi-arrow-down-up"></i>
@@ -29,7 +29,8 @@
         </div>
         <div class="d-flex flex-column align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
             aria-controls="offcanvasSearch">
-            <i class="bi bi-search"></i> <small><small>Search</small></small>
+            <i class="bi bi-search"></i>
+            <small><small>Search</small></small>
         </div>
         <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasSearch" aria-labelledby="offcanvasSearchLabel">
             <div class="offcanvas-header">
@@ -47,52 +48,36 @@
                 </div>
             </div>
         </div>
-    </PaymentLinks>
-    <div class="list-group list-flushed" style="padding-bottom: 100px;">
+    </OrdersLinks>
+    <div class="list-group list-flushed " style="padding-bottom: 100px;">
         <div v-for="(payment, index) in payments" :key="index" class="list-group-item  test">
-            <router-link v-if="payment.type === 'Buyer'" :to="'/buyer-detail/' + payment.id + '/bills'"
-                class="text-decoration-none text-dark">
-                <div class="d-flex align-items-center">
-                    <img class="rounded-circle border" style="width: 60px; height: 60px;object-fit: cover;"
-                        :src="`${publicPath}${payment.img}`" alt="">
-                    <div class="flex-fill ms-2 fw-bold">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0 single-line">{{ payment.name }}</p>
-                            <small class="single-line">₹ {{ payment.amt }}</small>
-                        </div>
-                        <small class="flex-fill d-flex justify-content-between">
-                            <p class="mb-0">{{ payment.type }}</p>
-                            <p v-if="payment.type === 'Buyer'" class="mb-0 text-success">{{ pendingOrders }} Pending</p>
-                        </small>
-                    </div>
+            <div class="d-flex align-items-center" @click="showSuppo(payment)">
+                <img :src="`${publicPath}${payment.img}`" style="height: 60px; width: 60px; object-fit: fill;"
+                    class="rounded-circle border">
+                <!-- <div class="rounded-circle border d-flex flex-column justify-content-center align-items-center me-3"
+                    style="height:60px; width:60px;">
+                    <div style="line-height: 1rem;">{{ payment.date }}</div>
+                    <small>{{ payment.month }}</small>
+                </div> -->
+                <div class="flex-fill ms-2 fw-bold">
+                    <p class="mb-0 single-line">{{ payment.fabric }}</p>
+                    <small class="d-flex justify-content-between">
+                        <p class="mb-0">{{ payment.pono }}</p>
+                        <p class="mb-0 ">{{ payment.qty }} @ {{ payment.price }}</p>
+                    </small>
                 </div>
-            </router-link>
-            <router-link v-if="payment.type === 'Supplier'" :to="'/supplier-detail/' + payment.id + '/bills'"
-                class="text-decoration-none text-dark">
-                <div class="d-flex align-items-center">
-                    <img class="rounded-circle border" style="width: 60px; height: 60px;object-fit: cover;"
-                        :src="`${publicPath}${payment.img}`" alt="">
-                    <div class="flex-fill ms-2 fw-bold">
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-0 single-line">{{ payment.name }}</p>
-                            <small class="single-line">₹ {{ payment.amt }}</small>
-                        </div>
-                        <small class="flex-fill d-flex justify-content-between">
-                            <p class="mb-0">{{ payment.type }}</p>
-                            <p v-if="payment.type === 'Supplier'" class="mb-0 text-danger">{{ pendingOrders }} Pending</p>
-                        </small>
-                    </div>
-                </div>
-            </router-link>
+            </div>
         </div>
     </div>
+    <SuppOrderDetail></SuppOrderDetail>
 </template>
 
 <script>
-import PaymentLinks from '@/components/PaymentLinks.vue';
+import SuppOrderDetail from '@/components/SuppOrderDetail.vue';
+import OrdersLinks from '@/components/OrdersLinks.vue';
 
 export default {
-    components: { PaymentLinks },
+    components: { OrdersLinks, SuppOrderDetail },
     data() {
         return {
             publicPath: process.env.BASE_URL,
@@ -106,20 +91,16 @@ export default {
     },
     computed: {
         payments() {
-            return this.$store.getters.getPayments
-        },
-        orders() {
-            return this.$store.getters.getSupplierOrders;
-        },
-        pendingOrders() {
-            // Filter the SupplierOrders array to get pending orders
-            const pendingOrders = this.orders.filter(order => order.status === 'Partial');
-            // Return the length of the pending orders array
-            return pendingOrders.length;
+            return this.$store.getters.getOrderPayments
         }
     },
     methods: {
-
+        showSuppo(payment) {
+            return this.$store.dispatch('selectSuppo', payment);
+        },
+        hideSupbill() {
+            return this.$store.dispatch('hideSupbill');
+        },
         paragraphColor(paragraph) {
             return paragraph.selected ? 'black' : 'gray';
         },

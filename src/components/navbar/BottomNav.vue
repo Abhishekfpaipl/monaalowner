@@ -22,30 +22,40 @@ export default {
         return {
             links: [
                 {
-                    path: '/',
-                    icon: 'bi bi-shop',
+                    path: '/dashboard',
+                    icon: 'bi bi-house-door-fill',
                     name: 'Dashboard'
                 },
                 {
                     path: '/stock',
-                    icon: 'bi bi-building',
+                    icon: 'bi bi-stack',
                     name: 'Stock'
                 },
                 {
                     path: '/payment/pending',
-                    icon: 'bi bi-bank',
+                    icon: 'bi bi-bank2',
                     name: 'Payments'
                 },
                 {
-                    path: '/buyers',
-                    icon: 'bi bi-person',
-                    name: 'Buyers'
+                    path: '/orders/pending',
+                    icon: 'bi bi-bookmarks-fill',
+                    name: 'Orders'
                 },
                 {
-                    path: '/suppliers',
-                    icon: 'bi bi-person',
-                    name: 'Suppliers'
+                    path: '/parties',
+                    icon: 'bi bi-people-fill',
+                    name: 'Parties'
                 },
+                // {
+                //     path: '/buyers',
+                //     icon: 'bi bi-person',
+                //     name: 'Buyers'
+                // },
+                // {
+                //     path: '/suppliers',
+                //     icon: 'bi bi-person',
+                //     name: 'Suppliers'
+                // },
             ]
         }
     }
@@ -54,6 +64,6 @@ export default {
 
 <style>
 .router-link-active.router-link-exact-active.nav-link {
-    color: red;
+    color: #0D6EFD;
 }
 </style>

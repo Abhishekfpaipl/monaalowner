@@ -1,7 +1,7 @@
 <template>
   <TopNav v-if="!hide" />
   <router-view />
-  <BottomNav style="position: fixed;bottom: 0px; width: 100%;" />
+  <BottomNav v-if="!bottomHide" style="position: fixed;bottom: 0px; width: 100%;" />
 </template>
 <script>
 import BottomNav from './components/navbar/BottomNav.vue'
@@ -14,7 +14,11 @@ export default {
   },
   computed: {
     hide() {
-      const hiddenPages = ['Buyer Detail Page', 'Detail Page', 'Stock Detail Page', 'Bill Detail Page', 'OverviewPage', 'OrdersPage', 'BillsPage','BuyerOverviewPage', 'BuyerOrdersPage', 'BuyerBillsPage','BuyerChatPage','SupplierChatPage']
+      const hiddenPages = ['Buyer Detail Page', 'Detail Page', 'Stock Detail Page', 'Bill Detail Page', 'OverviewPage', 'OrdersPage', 'BillsPage', 'BuyerOverviewPage', 'BuyerOrdersPage', 'BuyerBillsPage', 'BuyerChatPage', 'SupplierChatPage', 'RegistrationPage', 'LoginPage', 'ForgotPasswordPage','EmailVerificationPage','RootPage']
+      return hiddenPages.includes(this.$route.name)
+    },
+    bottomHide() {
+      const hiddenPages = ['RegistrationPage', 'LoginPage', 'ForgotPasswordPage','EmailVerificationPage','RootPage']
       return hiddenPages.includes(this.$route.name)
     }
   }

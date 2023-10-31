@@ -1,19 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-
+import auths from './auth.js'
 const routes = [
   {
     path: "/",
+    name: "RootPage",
+    component:()=> import('@/views/RootPage.vue'),
+  },
+  {
+    path: "/dashboard",
     name: "Home Page",
     component: HomeView,
   },
   {
     path: "/buyers",
-    name: "Buyers Page",
+    name: "BuyersPage",
     component: () => import('@/views/buyer/BuyersListPage.vue')
   },
   {
-    path: "/buyer-detail/:buyerId",
+    path: "/buyer-detail/:partyId",
     component: () => import('@/views/buyer/DetailPage.vue'),
     children: [
       {
@@ -44,7 +49,7 @@ const routes = [
     component: () => import('@/views/supplier/SuppliersListPage.vue')
   },
   {
-    path: "/supplier-detail/:supplierId",
+    path: "/supplier-detail/:partyId",
     component: () => import('@/views/supplier/DetailPage.vue'),
     children: [
       {
@@ -100,8 +105,46 @@ const routes = [
     ]
   },
   {
-
-  }
+    path: '/orders',
+    children: [
+      {
+        path: 'pending',
+        name: 'OrderPendingPage',
+        component: () => import('@/views/order/PendingPage.vue')
+      },
+      {
+        path: 'recent',
+        name: 'OrderRecentPage',
+        component: () => import('@/views/order/RecentPage.vue')
+      },
+    ]
+  },
+  {
+    path: '/parties',
+    name: 'PartyPage',
+    component: () => import('@/views/parties/PartyPage.vue')
+  },
+  {
+    path: '/party-suppliers',
+    name: 'SuppliersPage',
+    component: () => import('@/views/parties/SuppliersPage.vue')
+  },
+  {
+    path: "/update-page",
+    name: "update-page",
+    component: () => import('@/views/notification/UpdatePage.vue')
+  },
+  {
+    path: "/term-&-condition",
+    name: "TOSPage",
+    component: () => import('@/views/static/TOSPage.vue')
+  },
+  {
+    path: "/privacy-policy",
+    name: "PrivacyPolicy",
+    component: () => import('@/views/static/PrivacyPolicy.vue')
+  },
+  ...auths,
 ];
 
 const router = createRouter({
